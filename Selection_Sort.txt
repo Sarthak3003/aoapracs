@@ -1,72 +1,122 @@
-#include <stdio.h> 
-#include <time.h>
-#include <stdlib.h>
+#include <stdio.h>
 
-void swap(int *x, int *y) {
-	int temp = *y;
-	*y = *x;
-	*x = temp;
+void swap(int *xp, int *yp)
+{
+	int temp = *xp;
+	*xp = *yp;
+	*yp = temp;
 }
 
-void SelectionSort(int a[], int n) {
-	for(int i = 0; i < n; i++) {
-		int min = i;
-		for(int j = i + 1; j < n; j++) {
-			if(a[j] < a[min]) {
-				min = j;
-			}
-		}
-		swap(&a[min], &a[i]);
+void selectionSort(int arr[], int n)
+{
+	int i, j, min_idx;
+
+	// One by one move boundary of unsorted subarray
+	for (i = 0; i < n-1; i++)
+	{
+		// Find the minimum element in unsorted array
+		min_idx = i;
+		for (j = i+1; j < n; j++)
+		if (arr[j] < arr[min_idx])
+			min_idx = j;
+
+		// Swap the found minimum element with the first element
+		swap(&arr[min_idx], &arr[i]);
 	}
 }
 
-// AVERAGE CASE
-int main() {
-	clock_t start_t, end_t, total_t;
-	int n = 50000;
-	int a[n];
-	srand(time(0));
-	for(int i = 0; i < n; i++) {
-		a[i] = rand();
-	}
-	start_t = clock();
-	SelectionSort(a, n);
-	end_t = clock();
-	total_t = (double)(end_t - start_t);
-	printf("AVERAGE CASE \nTotal time taken by CPU: %ld\n", total_t  );
-	return 0;		
+/* Function to print an array */
+void printArray(int arr[], int size)
+{
+	int i;
+	for (i=0; i < size; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
 }
 
-//BEST CASE
+// Driver program to test above functions
+int main()
+{
+	int arr[] = {64, 25, 12, 22, 11};
+	int n = sizeof(arr)/sizeof(arr[0]);
+	selectionSort(arr, n);
+	printf("Sorted array: \n");
+	printArray(arr, n);
+	return 0;
+}
+
+
+//for best case etccc
+
+// #include <stdio.h> 
+// #include <time.h>
+// #include <stdlib.h>
+
+// void swap(int *x, int *y) {
+// 	int temp = *y;
+// 	*y = *x;
+// 	*x = temp;
+// }
+
+// void SelectionSort(int a[], int n) {
+// 	for(int i = 0; i < n; i++) {
+// 		int min = i;
+// 		for(int j = i + 1; j < n; j++) {
+// 			if(a[j] < a[min]) {
+// 				min = j;
+// 			}
+// 		}
+// 		swap(&a[min], &a[i]);
+// 	}
+// }
+
+// // AVERAGE CASE
 // int main() {
 // 	clock_t start_t, end_t, total_t;
 // 	int n = 50000;
 // 	int a[n];
 // 	srand(time(0));
 // 	for(int i = 0; i < n; i++) {
-// 		a[i] = i;
+// 		a[i] = rand();
 // 	}
 // 	start_t = clock();
 // 	SelectionSort(a, n);
 // 	end_t = clock();
 // 	total_t = (double)(end_t - start_t);
-// 	printf("BEST CASE \nTotal time taken by CPU: %ld\n", total_t);
+// 	printf("AVERAGE CASE \nTotal time taken by CPU: %ld\n", total_t  );
 // 	return 0;		
 // }
 
-//WORST CASE
-// int main() {
-// 	clock_t start_t, end_t, total_t;
-// 	int n = 50000;
-// 	int a[n];
-// 	srand(time(0));
-// 	for(int i = n - 1; i >= 0; i--) {
-// 		a[i] = i;
-// 	}
-// 	start_t = clock();
-// 	SelectionSort(a, n);
-// 	end_t = clock();
-// 	total_t = (double)(end_t - start_t);
-// 	printf("WORST CASE \nTotal time taken by CPU: %ld\n", total_t);
-// 	return 0;		
-// }
+// //BEST CASE
+// // int main() {
+// // 	clock_t start_t, end_t, total_t;
+// // 	int n = 50000;
+// // 	int a[n];
+// // 	srand(time(0));
+// // 	for(int i = 0; i < n; i++) {
+// // 		a[i] = i;
+// // 	}
+// // 	start_t = clock();
+// // 	SelectionSort(a, n);
+// // 	end_t = clock();
+// // 	total_t = (double)(end_t - start_t);
+// // 	printf("BEST CASE \nTotal time taken by CPU: %ld\n", total_t);
+// // 	return 0;		
+// // }
+
+// //WORST CASE
+// // int main() {
+// // 	clock_t start_t, end_t, total_t;
+// // 	int n = 50000;
+// // 	int a[n];
+// // 	srand(time(0));
+// // 	for(int i = n - 1; i >= 0; i--) {
+// // 		a[i] = i;
+// // 	}
+// // 	start_t = clock();
+// // 	SelectionSort(a, n);
+// // 	end_t = clock();
+// // 	total_t = (double)(end_t - start_t);
+// // 	printf("WORST CASE \nTotal time taken by CPU: %ld\n", total_t);
+// // 	return 0;		
+// // }
